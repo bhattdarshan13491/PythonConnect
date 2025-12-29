@@ -18,10 +18,18 @@ class PredictViewModel @Inject constructor(
     var state by mutableStateOf(PredictState())
         private set
 
-    fun onPredict(age: Int, bmi: Double, steps: Int) {
+    fun onPredict(yearsAsCustomer: Int,
+                  averageTransactionValue: Double,
+                  onTimePaymentRatio: Double,
+                  pastCreditDefault: String,) {
         viewModelScope.launch {
             state = state.copy(isLoading = true)
-            val result = predictRiskUseCase(age, bmi, steps)
+            val result = predictRiskUseCase(
+                yearsAsCustomer,
+                averageTransactionValue,
+                onTimePaymentRatio,
+                pastCreditDefault
+            )
             state = state.copy(
                 isLoading = false,
                 risk = result

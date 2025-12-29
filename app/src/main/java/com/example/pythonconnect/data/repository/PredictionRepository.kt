@@ -2,8 +2,9 @@ package com.example.pythonconnect.data.repository
 
 interface PredictionRepository {
     suspend fun predictRisk(
-        age: Int,
-        bmi: Double,
-        steps: Int
-    ): String
+        yearsAsCustomer: Int,
+        averageTransactionValue: Double,
+        onTimePaymentRatio: Double,
+        pastCreditDefault: String,
+    ): Double
 }

@@ -2,5 +2,5 @@ package com.example.pythonconnect.presentation.viewmodel.predict
 
 data class PredictState(
     val isLoading: Boolean = false,
-    val risk: String? = null
+    val risk: Double? = null
 )

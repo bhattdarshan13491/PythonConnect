@@ -8,14 +8,19 @@ class PredictRepositoryImpl @Inject constructor(
     private val api: PredictApi
 ) : PredictionRepository {
     override suspend fun predictRisk(
-        age: Int,
-        bmi: Double,
-        steps: Int
-    ): String {
+        yearsAsCustomer: Int,
+        averageTransactionValue: Double,
+        onTimePaymentRatio: Double,
+        pastCreditDefault: String,
+    ): Double {
         return api.predictRisk(
             PredictionRequestDto(
-                age, bmi, steps
+                yearsAsCustomer = 10,
+                purchaseFrequencyDays = 30,
+                averageTransactionValue = 100.0f,
+                onTimePaymentRatio = 0.9,
+                pastCreditDefault = "0"
             )
-        ).risk
+        ).creditLimit
     }
 }

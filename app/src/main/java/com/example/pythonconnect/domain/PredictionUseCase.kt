@@ -7,10 +7,11 @@ class PredictionUseCase @Inject constructor(
     private val repository: PredictionRepository
 ) {
     suspend operator fun invoke(
-        age: Int,
-        bmi: Double,
-        steps: Int
-    ): String {
-        return repository.predictRisk(age, bmi, steps)
+        yearsAsCustomer: Int,
+        averageTransactionValue: Double,
+        onTimePaymentRatio: Double,
+        pastCreditDefault: String,
+    ): Double {
+        return repository.predictRisk(yearsAsCustomer, averageTransactionValue, onTimePaymentRatio, pastCreditDefault)
     }
 }

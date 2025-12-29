@@ -29,9 +29,10 @@ fun PredictScreen(
     ) {
         Button(onClick = {
             viewModel.onPredict(
-                age = 32,
-                bmi = 27.5,
-                steps = 4000
+                yearsAsCustomer = 10,
+                averageTransactionValue = 1000.0,
+                onTimePaymentRatio = 0.9,
+                pastCreditDefault = "0"
             )
         }) {
             Text("Predict Risk")
