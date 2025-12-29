@@ -1,7 +1,8 @@
 **Overview:**
+
 This project is an end-to-end Android + Python + Machine Learning system where an Android app consumes a FastAPI backend that performs health risk prediction using a trained scikit-learn model.
 
-The goal of this project is to demonstrate:
+**The goal of this project is to demonstrate:**
 
 Clean Android architecture (MVVM, Compose, Hilt)
 
@@ -11,26 +12,18 @@ Practical ML integration (training vs inference)
 
 Real-world system integration between mobile and backend services
 
-**Architecture:**
-Android App (Jetpack Compose)
-        |
-        |  REST API (JSON)
-        v
-FastAPI Backend (Python)
-        |
-        v
-ML Inference (scikit-learn Model)
-
 **Modules:**
-Android App: UI, state management, API consumption
 
-Backend: API layer, validation, ML inference
+**Android App:** UI, state management, API consumption
 
-ML Pipeline: Offline training, model persistence, runtime inference
+**Backend:** API layer, validation, ML inference
+
+**ML Pipeline:** Offline training, model persistence, runtime inference
 
 **Android Application**
 
 **TechStack:**
+
 Kotlin
 
 Jetpack Compose
@@ -64,14 +57,38 @@ Pydantic (request/response validation)
 
 Clean service-layer architecture
 
-**Structure:**
-backend/
- ├── main.py              # API layer
- ├── models/              # Request/Response models
- ├── services/            # Business logic / ML inference
- ├── ml/                  # Training scripts & dataset
- ├── requirements.txt
+**Machine Learning Pipeline:**
+
+**ML Workflow:**
+
+CSV-based dataset
+
+Data cleaning using Pandas
+
+Feature selection (age, bmi, steps)
+
+Model training using RandomForestClassifier
+
+Model persistence using joblib
+
+Runtime inference via FastAPI service
+
+**Key ML Concepts Demonstrated**
+
+Supervised learning
+
+Training vs inference separation
+
+Feature vectors
+
+Model serialization
+
+Production-style ML integration
+
+Training **happens offline**.
+The backend performs inference only.
 
 **Author:**
-Darshan Bhatt
+
+**Darshan Bhatt**
 Senior Android Developer | Kotlin | Jetpack Compose | Python | AI/ML Integration
