@@ -1,0 +1,48 @@
+# ======================
+# Android
+# ======================
+*.apk
+*.aab
+*.dex
+*.class
+bin/
+gen/
+out/
+.gradle/
+build/
+local.properties
+captures/
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+
+# ======================
+# Python
+# ======================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+.venv/
+
+# ======================
+# ML / Data
+# ======================
+*.pkl
+*.joblib
+
+# ======================
+# OS
+# ======================
+.DS_Store
+Thumbs.db
+
+# ======================
+# Logs
+# ======================
+*.log
