@@ -1,94 +1,74 @@
 **Overview:**
 
-This project is an end-to-end Android + Python + Machine Learning system where an Android app consumes a FastAPI backend that performs health risk prediction using a trained scikit-learn model.
+This project is an end-to-end Android + Python + Machine Learning application that predicts an approved credit limit for a customer based on historical reliability data.
 
-**The goal of this project is to demonstrate:**
+The Android app fetches customer details from a local Room (SQLite) database and sends them to a FastAPI backend, which performs ML-based regression inference using a trained scikit-learn model.
 
-Clean Android architecture (MVVM, Compose, Hilt)
+**Demonstrates realistic Android + ML integration:**
 
-Python backend development using FastAPI
+Offline-first data handling
 
-Practical ML integration (training vs inference)
+Clean architecture
 
-Real-world system integration between mobile and backend services
+Honest ML evaluation
 
-**Modules:**
+End-to-end system design
 
-**Android App:** UI, state management, API consumption
+**Demo**
 
-**Backend:** API layer, validation, ML inference
+Result Screen:
 
-**ML Pipeline:** Offline training, model persistence, runtime inference
+<img width="540" height="1204" alt="Image" src="https://github.com/user-attachments/assets/40aecf7c-521c-4bff-8fbd-2dba11fbd80b" />
 
-**Android Application**
 
 **TechStack:**
 
-Kotlin
+**Android:**
+Kotlin + Jetpack Compose
 
-Jetpack Compose
+Clean MVVM + Hilt
 
-Clean MVVM Architecture
+Room for offline customer data
 
-Hilt (Dependency Injection)
+Customer ID–based lookup
 
-Retrofit + OkHttp
+Input validation & error handling
 
-Responsibilities
+**Backend:**
 
-Collect user input
+FastAPI + Pydantic
 
-Call backend prediction API
+Clean service-layer design
 
-Display prediction result
+Model & encoders loaded once
 
-Handle UI state (loading, success)
+REST-based inference API
 
-Android focuses **only on UI and state**, not business logic.
+**Machine Learning:**
 
-**Backend (FastAPI)**
-**Tech Stack**
+Problem: Supervised regression
 
-Python
+Target: credit_limit_approved
 
-FastAPI
+Features: tenure, purchase behavior, payment reliability
 
-Pydantic (request/response validation)
+Model: RandomForestRegressor
 
-Clean service-layer architecture
+Metric: Mean Absolute Error (MAE)
 
-**Machine Learning Pipeline:**
+Training and inference strictly separated
 
-**ML Workflow:**
+**How to run:**
+# Backend
+python -m uvicorn main:app --reload
 
-CSV-based dataset
+# Android
+Run from Android Studio
 
-Data cleaning using Pandas
+**Author**
 
-Feature selection (age, bmi, steps)
-
-Model training using RandomForestClassifier
-
-Model persistence using joblib
-
-Runtime inference via FastAPI service
-
-**Key ML Concepts Demonstrated**
-
-Supervised learning
-
-Training vs inference separation
-
-Feature vectors
-
-Model serialization
-
-Production-style ML integration
-
-Training **happens offline**.
-The backend performs inference only.
-
-**Author:**
 
 **Darshan Bhatt**
-Senior Android Developer | Kotlin | Jetpack Compose | Python | AI/ML Integration
+
+
+Senior Android Developer | Kotlin | Compose | Python | ML Integration
