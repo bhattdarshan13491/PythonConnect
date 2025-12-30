@@ -1,5 +1,6 @@
 package com.example.pythonconnect.presentation.viewmodel.predict
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewModelScope
 import androidx.compose.runtime.mutableStateOf
@@ -30,6 +31,7 @@ class PredictViewModel @Inject constructor(
                 onTimePaymentRatio,
                 pastCreditDefault
             )
+            Log.d("PredictViewModel", "VM. onPredict: $result")
             state = state.copy(
                 isLoading = false,
                 risk = result

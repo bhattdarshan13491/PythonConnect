@@ -1,5 +1,6 @@
 package com.example.pythonconnect.presentation.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -43,7 +44,8 @@ fun PredictScreen(
         }
 
         state.risk?.let {
-            Text("Risk: $it")
+            Log.d("PredictViewModel", "UI. onPredict: $it")
+            Text("Risk: ${it.toString()}")
         }
 
     }

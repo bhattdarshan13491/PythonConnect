@@ -1,5 +1,6 @@
 package com.example.pythonconnect.data.repository
 
+import android.util.Log
 import com.example.pythonconnect.data.remote.PredictApi
 import com.example.pythonconnect.data.remote.PredictionRequestDto
 import javax.inject.Inject
@@ -13,7 +14,7 @@ class PredictRepositoryImpl @Inject constructor(
         onTimePaymentRatio: Double,
         pastCreditDefault: String,
     ): Double {
-        return api.predictRisk(
+        val creditLimit = api.predictRisk(
             PredictionRequestDto(
                 yearsAsCustomer = 10,
                 purchaseFrequencyDays = 30,
@@ -22,5 +23,7 @@ class PredictRepositoryImpl @Inject constructor(
                 pastCreditDefault = "0"
             )
         ).creditLimit
+        Log.d("PredictViewModel", "Repo. onPredict: $creditLimit")
+        return creditLimit
     }
 }
