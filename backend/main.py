@@ -1,28 +1,31 @@
 from fastapi import FastAPI
-from models.prediction_models import PredictionRequest, PredictionResponse
+from models.prediction_models import (
+    CreditPredictionRequest,
+    CreditPredictionResponse
+)
 from services.prediction_service import PredictionService
 
-# Create FastAPI app with metadata
-app = FastAPI(
-    title="Health Risk Prediction API",
-    description="ML-powered prediction service consumed by Android app",
-    version="1.0.0"
-)
+app = FastAPI(title="Credit Limit Prediction API")
 
-# Initialize service (loads ML model once)
 prediction_service = PredictionService()
 
 
 @app.get("/")
 def health_check():
-    return {"status": "API is running with ML model"}
+    return {"status": "API is running with credit model"}
 
 
-@app.post("/predict", response_model=PredictionResponse)
-def predict_risk(request: PredictionRequest):
-    risk = prediction_service.predict_risk(
-        age=request.age,
-        bmi=request.bmi,
-        steps=request.steps
+@app.post("/predict", response_model=CreditPredictionResponse)
+def predict_credit_limit(request: CreditPredictionRequest):
+
+    credit_limit = prediction_service.predict_credit_limit(
+        years_as_customer=request.years_as_customer,
+        purchase_frequency_days=request.purchase_frequency_days,
+        average_transaction_value=request.average_transaction_value,
+        on_time_payment_ratio=request.on_time_payment_ratio,
+        past_credit_default=request.past_credit_default
     )
-    return PredictionResponse(risk=risk)
+
+    return CreditPredictionResponse(
+        approved_credit_limit=credit_limit
+    )

@@ -1,31 +1,74 @@
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_absolute_error
+from sklearn.preprocessing import LabelEncoder
 import joblib
 import os
 
-# Step 1: Load csv data
-# Get absolute path of current file
+# -------------------------
+# Load CSV safely
+# -------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-data_path = os.path.join(BASE_DIR, "health_risk_data.csv")
+data_path = os.path.join(BASE_DIR, "customer_credit_dataset.csv")
+
 df = pd.read_csv(data_path)
 
-# Step 2: Data cleanup:
-print(df.head())
-print(df.isnull().sum())
+# -------------------------
+# Data Cleaning
+# -------------------------
+df.fillna(df.mean(numeric_only=True), inplace=True)
 
-# Fill up missing values with column mean
-df["bmi"].fillna(df["bmi"].mean(), inplace=True)
-df["steps"].fillna(df["steps"].mean(), inplace=True)
+# -------------------------
+# Encode categorical feature
+# -------------------------
+label_encoder = LabelEncoder()
+df["past_credit_default"] = label_encoder.fit_transform(df["past_credit_default"])
 
-# Step 3: Selecting feature and target
-X = df[["age", "bmi", "steps"]]
-y = df["risk"]
+# -------------------------
+# Features & Target
+# -------------------------
+FEATURE_COLUMNS = [
+    "years_as_customer",
+    "purchase_frequency_days",
+    "average_transaction_value",
+    "on_time_payment_ratio",
+    "past_credit_default"
+]
 
-# Step 2: Train model
-model = RandomForestClassifier(n_estimators=100, random_state=42)
-model.fit(X, y)
+X = df[FEATURE_COLUMNS]
+y = df["credit_limit_approved"]
 
-# Step 3: Save Model
-joblib.dump(model, "risk_model.pkl")
+# -------------------------
+# Train / Test Split
+# -------------------------
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=42
+)
 
-print("Model trained and saved")
+# -------------------------
+# Train Model
+# -------------------------
+model = RandomForestRegressor(
+    n_estimators=100,
+    random_state=42
+)
+model.fit(X_train, y_train)
+
+# -------------------------
+# Evaluation
+# -------------------------
+y_pred = model.predict(X_test)
+mae = mean_absolute_error(y_test, y_pred)
+
+print("Mean Absolute Error (MAE):", mae)
+
+# -------------------------
+# Save Model
+# -------------------------
+joblib.dump(model, os.path.join(BASE_DIR, "credit_limit_model.pkl"))
+joblib.dump(
+    label_encoder,
+    os.path.join(BASE_DIR, "credit_default_encoder.pkl")
+)
+print("Credit limit model trained and saved successfully")
